@@ -6,7 +6,7 @@
 <title>Ark Video Gen — Professional Animation Engine</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0f;--surface:#14141f;--border:#1e1e2e;--text:#e0e0e0;--dim:#888;--accent:#6366f1;--accent2:#8b5cf6}
+:root{--bg:#0a0a0f;--surface:#14141f;--border:#1e1e2e;--text:#e0e0e0;--dim:#888;--accent:#6366f1;--accent2:#8b5cf6;--green:#22c55e;--red:#ef4444;--yellow:#eab308}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6}
 a{color:var(--accent);text-decoration:none}
 .container{max-width:1200px;margin:0 auto;padding:0 24px}
@@ -23,16 +23,42 @@ a{color:var(--accent);text-decoration:none}
 .stat .num{font-size:2.5rem;font-weight:800;color:var(--accent)}
 .stat .label{font-size:0.85rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
 
+/* Tabs */
+.tabs{display:flex;justify-content:center;gap:4px;padding:40px 0 0;flex-wrap:wrap}
+.tab{padding:10px 24px;border-radius:8px 8px 0 0;cursor:pointer;font-size:0.95rem;font-weight:500;background:var(--surface);border:1px solid var(--border);border-bottom:none;color:var(--dim);transition:all 0.2s}
+.tab:hover{color:var(--text)}
+.tab.active{background:var(--bg);color:var(--accent);border-color:var(--accent);border-bottom:1px solid var(--bg);position:relative;z-index:1}
+.tab-content{display:none;border-top:1px solid var(--border);padding-top:40px}
+.tab-content.active{display:block}
+
 /* Video Grid */
 .section{padding:60px 0}
 .section h2{font-size:2rem;font-weight:700;margin-bottom:32px;text-align:center}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(520px,1fr));gap:24px}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.2s}
 .card:hover{border-color:var(--accent)}
 .card video{width:100%;display:block;background:#000}
 .card-body{padding:20px}
 .card-body h3{font-size:1.1rem;font-weight:600;margin-bottom:6px}
 .card-body p{font-size:0.9rem;color:var(--dim)}
+
+/* Test Results */
+.test-status{display:inline-block;padding:2px 10px;border-radius:12px;font-size:0.8rem;font-weight:600;margin-left:8px}
+.test-pass{background:rgba(34,197,94,0.15);color:var(--green)}
+.test-fail{background:rgba(239,68,68,0.15);color:var(--red)}
+.test-table{width:100%;border-collapse:collapse;margin:20px 0}
+.test-table th,.test-table td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--border)}
+.test-table th{color:var(--dim);font-size:0.85rem;text-transform:uppercase;letter-spacing:1px}
+.test-table tr:hover{background:rgba(99,102,241,0.05)}
+.e2e-summary{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px}
+.e2e-summary h3{margin-bottom:12px}
+.e2e-bar{display:flex;gap:16px;flex-wrap:wrap}
+.e2e-item{display:flex;align-items:center;gap:6px;font-size:0.9rem}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.dot-green{background:var(--green)}
+.dot-red{background:var(--red)}
+.dot-yellow{background:var(--yellow)}
 
 /* Features */
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
@@ -50,7 +76,10 @@ footer{padding:40px 0;text-align:center;color:var(--dim);font-size:0.85rem;borde
 @media(max-width:600px){
   .hero h1{font-size:2rem}
   .grid{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
   .stats{flex-direction:column;gap:24px}
+  .tabs{gap:2px}
+  .tab{padding:8px 14px;font-size:0.85rem}
 }
 </style>
 </head>
@@ -75,12 +104,19 @@ footer{padding:40px 0;text-align:center;color:var(--dim);font-size:0.85rem;borde
 </div>
 </div>
 
-<section class="section">
+<!-- Tabs -->
 <div class="container">
-  <h2>Demo Videos</h2>
+<div class="tabs">
+  <div class="tab active" onclick="showTab('demos')">Demo Videos</div>
+  <div class="tab" onclick="showTab('e2e')">E2E Test Results</div>
+  <div class="tab" onclick="showTab('arch')">Architecture</div>
+</div>
+
+<!-- Tab: Demo Videos -->
+<div id="tab-demos" class="tab-content active">
   <div class="grid">
     <div class="card">
-      <video controls preload="metadata" poster="">
+      <video controls preload="metadata">
         <source src="videos/ShowcaseCharacterAnimation.mp4" type="video/mp4">
       </video>
       <div class="card-body">
@@ -117,11 +153,98 @@ footer{padding:40px 0;text-align:center;color:var(--dim);font-size:0.85rem;borde
     </div>
   </div>
 </div>
-</section>
 
-<section class="section">
-<div class="container">
-  <h2>System Architecture</h2>
+<!-- Tab: E2E Test Results -->
+<div id="tab-e2e" class="tab-content">
+  <div class="e2e-summary">
+    <h3>E2E Render Pipeline Test — May 7, 2026</h3>
+    <p style="color:var(--dim);margin-bottom:16px">Full render pipeline test: composition → frame rendering → H.264 encode → MP4 output</p>
+    <div class="e2e-bar">
+      <div class="e2e-item"><span class="dot dot-green"></span> TestComposition — 2.0 MB, 20s</div>
+      <div class="e2e-item"><span class="dot dot-green"></span> ShowcaseCharacterAnimation — 641 KB, 10s</div>
+      <div class="e2e-item"><span class="dot dot-green"></span> ShowcaseMotionDesign — 1.2 MB, 10s</div>
+      <div class="e2e-item"><span class="dot dot-green"></span> ShowcaseEffects — 1.6 MB, 10s</div>
+      <div class="e2e-item"><span class="dot dot-green"></span> ShowcasePixelForge — 1.3 MB, 10s</div>
+      <div class="e2e-item"><span class="dot dot-green"></span> DetoxMarketingVideo — 16.2 MB, 20s (too large for static hosting)</div>
+      <div class="e2e-item"><span class="dot dot-red"></span> DetoxInstagramPost — ShapeError (pre-existing)</div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:16px">Rendered Test Outputs</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/TestComposition.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>TestComposition <span class="test-status test-pass">PASS</span></h3>
+        <p>Dashboard wireframe walkthrough — cursor animation, modals, tooltips, KPI cards. 20s @ 24fps, 1920x1080.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcaseCharacterAnimation.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>CharacterAnimation <span class="test-status test-pass">PASS</span></h3>
+        <p>SDF avatar with expression cycling and procedural animation. 10s @ 24fps.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcaseMotionDesign.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>MotionDesign <span class="test-status test-pass">PASS</span></h3>
+        <p>Easing curves, spring physics, bounce animations. 10s @ 24fps.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcaseEffects.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Effects Pipeline <span class="test-status test-pass">PASS</span></h3>
+        <p>Color grading presets, film grain, vignette demo. 10s @ 24fps.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcasePixelForge.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>PixelForge <span class="test-status test-pass">PASS</span></h3>
+        <p>Pixel-level rendering, procedural animation. 10s @ 24fps.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin:32px 0 16px">Unit Test Summary</h3>
+  <table class="test-table">
+    <thead><tr><th>Module</th><th>Tests</th><th>Status</th><th>Coverage</th></tr></thead>
+    <tbody>
+      <tr><td>character_system</td><td>24</td><td><span class="test-status test-pass">PASS</span></td><td>Skeletal, lip-sync, IK, facial</td></tr>
+      <tr><td>asset_pipeline</td><td>22</td><td><span class="test-status test-pass">PASS</span></td><td>Textures, materials, environments</td></tr>
+      <tr><td>motion_design</td><td>25</td><td><span class="test-status test-pass">PASS</span></td><td>Keyframes, particles, physics</td></tr>
+      <tr><td>content_templates</td><td>8</td><td><span class="test-status test-pass">PASS</span></td><td>5 video presets</td></tr>
+      <tr><td>render_optimizer</td><td>16</td><td><span class="test-status test-pass">PASS</span></td><td>Cache, batch, profiler</td></tr>
+      <tr><td>template_pipeline</td><td>9</td><td><span class="test-status test-pass">PASS</span></td><td>Voice→template→render</td></tr>
+      <tr><td>scene_composition</td><td>26</td><td><span class="test-status test-pass">PASS</span></td><td>Layout, cameras, transitions</td></tr>
+      <tr><td>character_customization</td><td>15</td><td><span class="test-status test-pass">PASS</span></td><td>Skin, hair, outfit, crowd gen</td></tr>
+      <tr><td>quality_polish</td><td>10</td><td><span class="test-status test-pass">PASS</span></td><td>Blur, denoise, grading</td></tr>
+      <tr><td>visual_qa</td><td>8</td><td><span class="test-status test-pass">PASS</span></td><td>Frame QA, flicker detection</td></tr>
+      <tr><td>character_integration</td><td>5</td><td><span class="test-status test-pass">PASS</span></td><td>Multi-character pipeline</td></tr>
+      <tr><td>asset_integration</td><td>6</td><td><span class="test-status test-pass">PASS</span></td><td>Full asset workflow</td></tr>
+      <tr><td>e2e_voice_animation</td><td>5</td><td><span class="test-status test-pass">PASS</span></td><td>Voice→lip-sync→render</td></tr>
+      <tr><td>stress_tests</td><td>6</td><td><span class="test-status test-pass">PASS</span></td><td>100 chars, 10K keyframes</td></tr>
+      <tr><td>visual_tests</td><td>7</td><td><span class="test-status test-pass">PASS</span></td><td>Compositing, grading, blur</td></tr>
+      <tr><td>visual_regression</td><td>2</td><td><span class="test-status test-pass">PASS</span></td><td>Regression detection</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Tab: Architecture -->
+<div id="tab-arch" class="tab-content">
   <div class="features">
     <div class="feature">
       <h3>Character System</h3>
@@ -156,26 +279,25 @@ footer{padding:40px 0;text-align:center;color:var(--dim);font-size:0.85rem;borde
       <p>Automated quality validation — black/white frame detection, flicker detection, temporal consistency, frozen frame detection. 8 tests.</p>
     </div>
   </div>
-</div>
-</section>
 
-<section class="section">
-<div class="container">
-  <h2>Built With</h2>
-  <div class="tech">
-    <span class="tech-badge">Rust 2024</span>
-    <span class="tech-badge">Skia (skia-safe)</span>
-    <span class="tech-badge">wgpu</span>
-    <span class="tech-badge">Vulkan</span>
-    <span class="tech-badge">rayon</span>
-    <span class="tech-badge">tokio</span>
-    <span class="tech-badge">axum</span>
-    <span class="tech-badge">glam</span>
-    <span class="tech-badge">ffmpeg</span>
-    <span class="tech-badge">H.264</span>
+  <div class="section">
+    <h2>Built With</h2>
+    <div class="tech">
+      <span class="tech-badge">Rust 2024</span>
+      <span class="tech-badge">Skia (skia-safe)</span>
+      <span class="tech-badge">wgpu</span>
+      <span class="tech-badge">Vulkan</span>
+      <span class="tech-badge">rayon</span>
+      <span class="tech-badge">tokio</span>
+      <span class="tech-badge">axum</span>
+      <span class="tech-badge">glam</span>
+      <span class="tech-badge">ffmpeg</span>
+      <span class="tech-badge">H.264</span>
+    </div>
   </div>
 </div>
-</section>
+
+</div><!-- /container -->
 
 <footer>
 <div class="container">
@@ -183,5 +305,13 @@ footer{padding:40px 0;text-align:center;color:var(--dim);font-size:0.85rem;borde
 </div>
 </footer>
 
+<script>
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
 </body>
 </html>
