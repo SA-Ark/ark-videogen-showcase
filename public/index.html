@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ark Video Gen — Professional Animation Engine</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--surface:#14141f;--border:#1e1e2e;--text:#e0e0e0;--dim:#888;--accent:#6366f1;--accent2:#8b5cf6}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* Hero */
+.hero{padding:80px 0 60px;text-align:center;background:linear-gradient(180deg,#0f0f1a 0%,var(--bg) 100%)}
+.hero h1{font-size:3rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2),#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.hero p{font-size:1.25rem;color:var(--dim);max-width:640px;margin:0 auto 32px}
+.badge{display:inline-block;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:0.85rem;color:var(--accent);margin:0 4px 8px}
+
+/* Stats */
+.stats{display:flex;justify-content:center;gap:48px;padding:40px 0;border-bottom:1px solid var(--border)}
+.stat{text-align:center}
+.stat .num{font-size:2.5rem;font-weight:800;color:var(--accent)}
+.stat .label{font-size:0.85rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+
+/* Video Grid */
+.section{padding:60px 0}
+.section h2{font-size:2rem;font-weight:700;margin-bottom:32px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(520px,1fr));gap:24px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.2s}
+.card:hover{border-color:var(--accent)}
+.card video{width:100%;display:block;background:#000}
+.card-body{padding:20px}
+.card-body h3{font-size:1.1rem;font-weight:600;margin-bottom:6px}
+.card-body p{font-size:0.9rem;color:var(--dim)}
+
+/* Features */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.feature{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
+.feature h3{font-size:1rem;font-weight:600;margin-bottom:8px;color:var(--accent)}
+.feature p{font-size:0.875rem;color:var(--dim)}
+
+/* Tech */
+.tech{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;padding:20px 0}
+.tech-badge{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:0.85rem;font-weight:500}
+
+/* Footer */
+footer{padding:40px 0;text-align:center;color:var(--dim);font-size:0.85rem;border-top:1px solid var(--border)}
+
+@media(max-width:600px){
+  .hero h1{font-size:2rem}
+  .grid{grid-template-columns:1fr}
+  .stats{flex-direction:column;gap:24px}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<div class="container">
+  <h1>Ark Video Gen</h1>
+  <p>Professional-grade animation engine built in Rust. Pixel-first rendering, GPU-accelerated compositing, voice-driven character animation.</p>
+  <span class="badge">Rust + Skia + wgpu</span>
+  <span class="badge">Pixel-First Rendering</span>
+  <span class="badge">Voice-Driven Animation</span>
+</div>
+</section>
+
+<div class="container">
+<div class="stats">
+  <div class="stat"><div class="num">199+</div><div class="label">Tests Passing</div></div>
+  <div class="stat"><div class="num">12</div><div class="label">Modules</div></div>
+  <div class="stat"><div class="num">30K+</div><div class="label">Lines of Rust</div></div>
+  <div class="stat"><div class="num">0</div><div class="label">Failures</div></div>
+</div>
+</div>
+
+<section class="section">
+<div class="container">
+  <h2>Demo Videos</h2>
+  <div class="grid">
+    <div class="card">
+      <video controls preload="metadata" poster="">
+        <source src="videos/ShowcaseCharacterAnimation.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Character Animation</h3>
+        <p>Skeletal rigs, facial expressions, lip-sync driven by voice timestamps. SDF avatar rendering with real-time emotion transitions.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcaseMotionDesign.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Motion Design Engine</h3>
+        <p>Keyframe animation with bezier curves, spring physics, bounce easing. GPU particle systems and camera choreography.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcaseEffects.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Quality Polish Pipeline</h3>
+        <p>Film grain, vignette, color grading presets. Motion blur, temporal denoising, chromatic aberration — cinema-grade post-processing.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcasePixelForge.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Pixel-First Rendering</h3>
+        <p>Direct pixel manipulation — no shape primitives. Gaussian blur, Sobel edge detection, cel-shading, procedural animation at the buffer level.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <h2>System Architecture</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>Character System</h3>
+      <p>Skeletal animation with IK solving, 52-blend-shape facial rig, phoneme-to-viseme lip-sync, emotion-driven expressions. 24 tests.</p>
+    </div>
+    <div class="feature">
+      <h3>Asset Pipeline</h3>
+      <p>Procedural PBR textures, material presets, environment templates, LOD generation, texture atlas packing. 22 tests.</p>
+    </div>
+    <div class="feature">
+      <h3>Motion Design</h3>
+      <p>Keyframe editor with bezier curves, motion graphs, GPU particle systems, rigid/soft body physics, camera choreography. 25 tests.</p>
+    </div>
+    <div class="feature">
+      <h3>Content Templates</h3>
+      <p>5 video presets — Explainer, Product Demo, Educational, Story, Social Clip. Auto-generates RenderPlans from voice input. 8 tests.</p>
+    </div>
+    <div class="feature">
+      <h3>Scene Composition</h3>
+      <p>Auto-layout (rule of thirds, golden ratio), 11 camera presets (dolly, crane, orbit), 6 transition types. 26 tests.</p>
+    </div>
+    <div class="feature">
+      <h3>Render Optimizer</h3>
+      <p>Frame caching with LRU eviction, delta detection, parallel batch rendering via rayon, per-scope profiling. 16 tests.</p>
+    </div>
+    <div class="feature">
+      <h3>Quality Polish</h3>
+      <p>Motion blur (directional + radial), temporal denoising with motion awareness, film grain, vignette, chromatic aberration. 10 tests.</p>
+    </div>
+    <div class="feature">
+      <h3>Visual QA</h3>
+      <p>Automated quality validation — black/white frame detection, flicker detection, temporal consistency, frozen frame detection. 8 tests.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <h2>Built With</h2>
+  <div class="tech">
+    <span class="tech-badge">Rust 2024</span>
+    <span class="tech-badge">Skia (skia-safe)</span>
+    <span class="tech-badge">wgpu</span>
+    <span class="tech-badge">Vulkan</span>
+    <span class="tech-badge">rayon</span>
+    <span class="tech-badge">tokio</span>
+    <span class="tech-badge">axum</span>
+    <span class="tech-badge">glam</span>
+    <span class="tech-badge">ffmpeg</span>
+    <span class="tech-badge">H.264</span>
+  </div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+  <p>Ark Video Gen &mdash; Built by SA-Ark &mdash; Pixel-first, voice-driven, GPU-accelerated</p>
+</div>
+</footer>
+
+</body>
+</html>
