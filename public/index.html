@@ -152,9 +152,66 @@ footer{padding:40px 0;text-align:center;color:var(--dim);font-size:0.85rem;borde
       </div>
     </div>
   </div>
-</div>
 
-<!-- Tab: E2E Test Results -->
+  <h2 style="margin:32px 0 16px;color:var(--fg)">Advanced Showcase — V2</h2>
+  <p style="color:var(--dim);margin-bottom:24px">30-second demos showcasing distinct engine capabilities. Pure Rust rendering — no AI generation.</p>
+  <div class="grid">
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcaseCharacterV2.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Character Animation V2</h3>
+        <p>FK skeletal animation with joint interpolation. Multiple characters, pose keyframes (standing, walking, waving, jumping), spring physics easing.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/Showcase3DPBR.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>3D PBR Rendering</h3>
+        <p>Per-pixel Cook-Torrance BRDF with Fresnel, metalness/roughness cycling (gold, plastic, glass, skin). Rotating light source, ground reflections.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcaseCinematic.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Cinematic Camera Pipeline</h3>
+        <p>Multi-layer parallax mountains, film grain, vignette, anamorphic lens flare, color grading, letterboxing. Full camera simulation stack.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcaseWhiteboard.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Whiteboard Explainer</h3>
+        <p>Progressive hand-drawing with trim-path reveal, pen cursor tracking, hand-drawn wobble, TextReveal character-by-character animation.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcaseKineticTypo.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Kinetic Typography</h3>
+        <p>Per-word stagger timing, 8 motion types (scale, slide, bounce, rotate), word emphasis scaling, animated gradient backgrounds + particles.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video controls preload="metadata">
+        <source src="videos/ShowcaseCelShade.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Cel-Shaded Anime</h3>
+        <p>Flat color bands, Sobel edge outlines, 2-tone hard shadows, anime specular highlights, speed lines. Full anime character with animated mouth/eyes.</p>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="tab-e2e" class="tab-content">
   <div class="e2e-summary">
     <h3>E2E Render Pipeline Test — May 7, 2026</h3>
