@@ -268,6 +268,21 @@ footer{padding:40px 0;text-align:center;color:var(--dim);font-size:0.85rem;borde
       </div>
     </div>
   </div>
+
+  <h2 style="margin:32px 0 16px;color:var(--accent)">🦴 NEW: FK Animation + Character-Agnostic Rig System</h2>
+  <p style="color:var(--dim);margin-bottom:24px">SAM2 body-part segmentation + forward kinematics with ±30-45° joint rotation. Character-agnostic rig system: any sprite + any TOML rig = animated character. Shipped 4 rig presets (humanoid, quadruped, mecha, object). <strong>May 10, 2026</strong></p>
+  <div class="grid">
+    <div class="card" style="grid-column: 1 / -1; border-color: var(--accent);">
+      <video controls preload="metadata" style="max-height:480px;margin:0 auto;display:block">
+        <source src="videos/FKFight30s.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h3>Naruto vs Sasuke — FK Animation Fight (30s)</h3>
+        <p>30-second fight rendered with the new FK animation pipeline: humanoid_segment() generates proportional bounding boxes → SAM2 produces pixel-perfect body-part masks → PartBasedFighter applies forward kinematics with real ±30-45° limb rotation (10-20× more than mesh deformation). Characters have visible arm/leg movement driven by fight choreography poses. Cel-shaded with rim lighting in acts 3-4.</p>
+        <p style="margin-top:8px;font-size:0.8rem;color:var(--accent)">📅 May 10, 2026 &middot; 30s &middot; 1280×720 &middot; 23.5 MB &middot; Pipeline: humanoid_segment → SAM2 → PartBasedFighter → FK</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="tab-e2e" class="tab-content">
